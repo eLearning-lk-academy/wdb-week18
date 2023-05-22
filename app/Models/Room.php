@@ -16,7 +16,8 @@ class Room extends Model
         'beds',
         'occupancy',
         'price_per_hour',
-        'status'
+        'status',
+        'image'
     ];
 
     const roomTypes = [

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
+use Illuminate\Http\Request;
 use App\Models\Room;
 
 class RoomController extends Controller
@@ -41,6 +42,7 @@ class RoomController extends Controller
             'occupancy' => $request->occupancy,
             'price_per_hour' => $request->price ?? 1000,
             'status' => $request->status ?? 'unavailable',
+            'image' => $request->image
         ];
         // dd($data);
         Room::create($data);
@@ -85,5 +87,25 @@ class RoomController extends Controller
     {
         $room->delete($room);
         return redirect()->route('room.index');
+    }
+
+    public function imageUpload(Request $request){
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:3072', // 2MB
+        ]); 
+        $file = $request->file('image');
+        $path = $file->store('uploads', 'public');
+
+        if($path){
+            return response()->json([
+                'status' => true,
+                'image' => $path
+            ]);
+        }else{
+            return response()->json([
+                'status' => false,
+                'message' => 'Image upload failed'
+            ]);
+        }
     }
 }
