@@ -104,7 +104,11 @@
                         console.log(response);
                         if(response.status){
                             $('#image').val(response.image);
+                            notyf.success('Image uploaded successfully')
+                        }else{
+                            notyf.error('Image upload failed')
                         }
+
                     });
                 }
             });
