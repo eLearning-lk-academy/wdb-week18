@@ -57,7 +57,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="status"> Status</label>
-                                <select class="custom-select">
+                                <select name="status" id="status" class="custom-select">
                                     <option>Select Room type</option>
                                     @foreach ($statuses as $key => $status )
                                         <option value="{{$key}}" {{($room->status == $key ? 'selected': '' )}} >{{$status}}</option>
