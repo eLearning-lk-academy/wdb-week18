@@ -30,6 +30,10 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="short_description">Short description</label>
+                        <textarea class="form-control" rows="3" name=short_description id=short_description placeholder="Enter ..."></textarea>
+                    </div>
+                    <div class="form-group">
                         <label for="description">description</label>
                         <textarea class="form-control" rows="3" name=description id=description placeholder="Enter ..."></textarea>
                     </div>
@@ -85,9 +89,11 @@
     @endsection
     @push('css')
         <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tinymce@6.4.2/skins/ui/oxide/content.min.css">
     @endpush
     @push('scripts')
         <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/tinymce@6.4.2/tinymce.min.js"></script>
         <script>
             Dropzone.autoDiscover = false;
 
@@ -111,6 +117,11 @@
 
                     });
                 }
+            });
+
+            
+            tinymce.init({
+                selector: '#description'
             });
         </script>
     @endpush
