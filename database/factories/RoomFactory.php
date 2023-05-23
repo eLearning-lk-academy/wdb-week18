@@ -18,6 +18,7 @@ class RoomFactory extends Factory
     {
         return [
             'number' => $this->faker->numberBetween(100, 999),
+            'name' => $this->faker->sentence(2), // 'room 101
             'type' => $this->faker->randomElement(['standard', 'deluxe', 'luxury', 'suite']),
             'description' => $this->faker->text(200),
             'beds' => $this->faker->numberBetween(1, 4),

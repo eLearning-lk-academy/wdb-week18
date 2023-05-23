@@ -9,7 +9,6 @@ class RoomSearchController extends Controller
 {
     public function index(Request $request)
     {
-        dump($request->all());
         // $rooms = Room::where('type', $request->booking_roomtype)
         //     ->where('occupancy','>=',$request->booking_adults)
         //     ->where('status','available')
@@ -23,7 +22,8 @@ class RoomSearchController extends Controller
             $rooms =$rooms->where('occupancy','>=',$request->booking_adults);
         }
         $rooms =$rooms->get();
-            dd($rooms);
+        
+        return view('web.rooms.list', compact('rooms'));
         
     }
 }

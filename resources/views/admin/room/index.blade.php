@@ -4,8 +4,8 @@
             <table id="rooms" class="table table-bordered table-striped dataTable dtr-inline" >
                 <thead>
                     <tr>
-                        <th>Room ID.</th>
                         <th>Room No.</th>
+                        <th>Room Name</th>
                         <th>Room Type</th>
                         <th>Description</th>
                         <th>No. of Beds</th>
@@ -18,8 +18,8 @@
                 <tbody>
                     @foreach ($rooms as $room)
                         <tr>
-                            <td>{{ $room->id }}</td>
                             <td>{{ $room->number }}</td>
+                            <td>{{ $room->name }}</td>
                             <td>{{ $room->type }}</td>
                             <td>{{ $room->description }}</td>
                             <td>{{ $room->beds }}</td>
