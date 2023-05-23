@@ -6,6 +6,7 @@ use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
 use Illuminate\Http\Request;
 use App\Models\Room;
+use Illuminate\Support\Facades\Storage;
 
 class RoomController extends Controller
 {
@@ -66,6 +67,10 @@ class RoomController extends Controller
      */
     public function update(UpdateRoomRequest $request, Room $room)
     {
+
+        if($request->image != $room->image && !empty($room->image)){
+            Storage::disk('public')->delete($room->image);
+        }
         $data = [
             'number' => $request->room_no,
             'type' => $request->type ?? 'standard',
@@ -74,6 +79,7 @@ class RoomController extends Controller
             'occupancy' => $request->occupancy,
             'price_per_hour' => $request->price ?? 1000,
             'status' => $request->status ?? 'unavailable',
+            'image' => $request->image
         ];
 
         $room->update($data);
