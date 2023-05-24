@@ -36,27 +36,25 @@
       <i class="fa fa-angle-up" aria-hidden="true"></i>
     </div>
     <!-- ========== JAVASCRIPT ========== -->
-    <script src="js/jquery.min.js"></script>
-    <script src="http://maps.google.com/maps/api/js?key=YOUR_API_KEY"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-select.min.js"></script>
-    <script src="js/jquery.mmenu.js"></script>
-    <script src="js/jquery.inview.min.js"></script>
-    <script src="js/jquery.countdown.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/owl.carousel.thumbs.min.js"></script>
-    <script src="js/isotope.pkgd.min.js"></script>
-    <script src="js/imagesloaded.pkgd.min.js"></script>
-    <script src="js/masonry.pkgd.min.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/countup.min.js"></script>
-    <script src="js/moment.min.js"></script>
-    <script src="js/daterangepicker.js"></script>
-    <script src="js/parallax.min.js"></script>
-    <script src="js/smoothscroll.min.js"></script>
-    <script src="js/instafeed.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="{{asset('js/jquery.min.js')}}"></script>
+    <script src="{{asset('http://maps.google.com/maps/api/js?key=YOUR_API_KEY')}}"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap-select.min.js')}}"></script>
+    <script src="{{asset('js/jquery.mmenu.js')}}"></script>
+    <script src="{{asset('js/jquery.inview.min.js')}}"></script>
+    <script src="{{asset('js/jquery.countdown.min.js')}}"></script>
+    <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('js/isotope.pkgd.min.js')}}"></script>
+    <script src="{{asset('js/imagesloaded.pkgd.min.js')}}"></script>
+    <script src="{{asset('js/masonry.pkgd.min.js')}}"></script>
+    <script src="{{asset('js/wow.min.js')}}"></script>
+    <script src="{{asset('js/countup.min.js')}}"></script>
+    <script src="{{asset('js/moment.min.js')}}"></script>
+    <script src="{{asset('js/daterangepicker.js')}}"></script>
+    <script src="{{asset('js/parallax.min.js')}}"></script>
+    <script src="{{asset('js/smoothscroll.min.js')}}"></script>
+    <script src="{{asset('js/instafeed.min.js')}}"></script>
+    <script src="{{asset('js/main.js')}}"></script>
     @stack('scripts')
   </body>
 </html>

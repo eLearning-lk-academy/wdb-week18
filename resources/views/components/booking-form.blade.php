@@ -4,7 +4,7 @@
       <div class="inner box-shadow-007">
         <!-- ========== BOOKING NOTIFICATION ========== -->
         <div id="booking-notification" class="notification"></div>
-        <form id="booking-form3" action="search" >
+        <form id="booking-form3" action="rooms" >
           <!-- NAME -->
           <div class="row">
             <div class="col-md-2">

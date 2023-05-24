@@ -29,6 +29,20 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="name">Room Name</label>
+                                <input type="text" name="name" id="name" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="slug">Slug</label>
+                                <input type="text" name="slug" id="slug" class="form-control">
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="short_description">Short description</label>
                         <textarea class="form-control" rows="3" name=short_description id=short_description placeholder="Enter ..."></textarea>

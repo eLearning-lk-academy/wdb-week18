@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\RoomSearchController;
+use App\Http\Controllers\WebRoomController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -46,8 +46,8 @@ Route::middleware(['auth','permission:rooms'])->group(function () {
     });
 });
 
-Route::get('/search', [RoomSearchController::class, 'index'])->name('search');
-
+Route::get('/rooms', [WebRoomController::class, 'index'])->name('rooms');
+Route::get('/room/{slug}', [WebRoomController::class, 'show'])->name('room.show');
 require __DIR__.'/auth.php';
 
 Auth::routes();

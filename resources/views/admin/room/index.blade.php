@@ -21,7 +21,7 @@
                             <td>{{ $room->number }}</td>
                             <td>{{ $room->name }}</td>
                             <td>{{ $room->type }}</td>
-                            <td>{{ $room->description }}</td>
+                            <td>{{ $room->short_description }}</td>
                             <td>{{ $room->beds }}</td>
                             <td>{{ $room->occupancy }}</td>
                             <td>{{ $room->price_per_hour }}</td>

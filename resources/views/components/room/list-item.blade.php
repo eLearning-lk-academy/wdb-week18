@@ -3,14 +3,14 @@
     <div class="row">
         <div class="col-lg-4">
             <figure class="gradient-overlay-hover link-icon">
-                <a href="room.html"><img src="{{$room->image ? asset('storage/'.$room->image) :'images/placeholder.jpg'}}" class="img-fluid"
+                <a href="{{ route('room.show', $room->slug)}}"><img src="{{$room->image ? asset('storage/'.$room->image) :'images/placeholder.jpg'}}" class="img-fluid"
                         alt="Image"></a>
             </figure>
         </div>
         <div class="col-lg-6">
             <div class="room-info">
                 <h3 class="room-title">
-                    <a href="#">{{$room->name}}</a>
+                    <a href="{{ route('room.show', $room->slug)}}">{{$room->name}}</a>
                 </h3>
                 <span class="room-rates">
                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -18,10 +18,10 @@
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
-                    <a href="room.html#room-reviews">5.00 Based on 3 Ratings</a>
+                    <a href="{{ route('room.show', $room->slug)}}#room-reviews">5.00 Based on 3 Ratings</a>
                 </span>
                 <p>
-                    {{$room->description}}
+                    {{$room->short_description}}
                 </p>
                 <div class="room-services">
                     <i class="fa fa-coffee" data-toggle="popover" data-placement="top" data-trigger="hover"
@@ -38,7 +38,7 @@
         <div class="col-lg-2">
             <div class="room-price">
                 <span class="price">LKR {{$room->price_per_hour}} / hour</span>
-                <a href="room.html" class="btn btn-sm">VIEW DETAILS</a>
+                <a href="{{ route('room.show', $room->slug)}}" class="btn btn-sm">VIEW DETAILS</a>
             </div>
         </div>
     </div>

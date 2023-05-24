@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('type', 10);
             $table->text('description');
+            $table->text('short_description');
+            $table->string('slug')->unique();
             $table->integer('beds');
             $table->integer('occupancy');
             $table->decimal('price_per_hour', 10, 2);

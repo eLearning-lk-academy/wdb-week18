@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Room;
 
-class RoomSearchController extends Controller
+class WebRoomController extends Controller
 {
     public function index(Request $request)
     {
@@ -25,5 +25,11 @@ class RoomSearchController extends Controller
         
         return view('web.rooms.list', compact('rooms'));
         
+    }
+    public function show($slug)
+    {
+        $room = Room::where('slug',$slug)->first();
+        // dd($room);
+        return view('web.rooms.show', compact('room'));
     }
 }
