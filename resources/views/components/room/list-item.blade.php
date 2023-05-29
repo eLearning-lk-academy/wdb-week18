@@ -3,8 +3,9 @@
     <div class="row">
         <div class="col-lg-4">
             <figure class="gradient-overlay-hover link-icon">
-                <a href="{{ route('room.show', $room->slug)}}"><img src="{{$room->image ? asset('storage/'.$room->image) :'images/placeholder.jpg'}}" class="img-fluid"
-                        alt="Image"></a>
+                <a href="{{ route('room.show', $room->slug)}}">
+                    <img src="{{imageCheck($room->image)}}" class="img-fluid" alt="Image">
+                    </a>
             </figure>
         </div>
         <div class="col-lg-6">

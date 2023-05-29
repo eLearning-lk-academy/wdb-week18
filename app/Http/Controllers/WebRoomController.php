@@ -22,6 +22,16 @@ class WebRoomController extends Controller
             $rooms =$rooms->where('occupancy','>=',$request->booking_adults);
         }
         $rooms =$rooms->get();
+
+        $bookingData= [
+            'booking_roomtype' => $request->booking_roomtype,
+            'booking_adults' => $request->booking_adults,
+            'booking_email' => $request->booking_email,
+            'booking_date'=> $request->booking_date,
+            'booking_name' => $request->booking_name,
+        ];
+
+        session()->put('bookingData', $bookingData);
         
         return view('web.rooms.list', compact('rooms'));
         
@@ -29,7 +39,8 @@ class WebRoomController extends Controller
     public function show($slug)
     {
         $room = Room::where('slug',$slug)->first();
-        // dd($room);
-        return view('web.rooms.show', compact('room'));
+        $bookingData = session()->get('bookingData');
+        $roomTypes = Room::roomTypes;
+        return view('web.rooms.show', compact('room', 'bookingData', 'roomTypes'));
     }
 }

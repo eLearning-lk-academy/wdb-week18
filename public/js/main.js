@@ -327,7 +327,7 @@ Version:       1.1.0
     // =============================================
     // BOOKING FORM
     // =============================================
-    $("#booking-form").on('submit', function(e) {
+    /*$("#booking-form").on('submit', function(e) {
       e.preventDefault();
 
       //Get input field values from HTML form
@@ -396,7 +396,7 @@ Version:       1.1.0
 
       }, 'json');
 
-    });
+    });*/
 
     // =============================================
     // CONTACT FORM

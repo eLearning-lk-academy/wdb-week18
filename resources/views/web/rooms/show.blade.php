@@ -357,19 +357,26 @@
                                 <div id="booking-notification" class="notification"></div>
                                 <h3 class="form-title">BOOK YOUR ROOM</h3>
                                 <div class="inner">
-                                    <form id="booking-form">
+                                    <form id="booking-form" method="post" action="{{route('booking.create')}}">
+                                        @csrf
+                                        <input type="hidden" name="room_id" value="{{$room->id}}">
+                                        <!-- Name -->
+                                        {{-- <div class="form-group">
+                                            <input class="form-control" name="booking_name" type="name"
+                                                placeholder="Your Name" value="{{$bookingData['booking_name']}}">
+                                        </div>
                                         <!-- EMAIL -->
                                         <div class="form-group">
-                                            <input class="form-control" name="booking-email" type="email"
-                                                placeholder="Your Email Address">
-                                        </div>
+                                            <input class="form-control" name="booking_email" type="email"
+                                                placeholder="Your Email Address" value="{{$bookingData['booking_email']}}">
+                                        </div> --}}
                                         <!-- ROOM TYPE -->
                                         <div class="form-group">
                                             <select class="form-control" name="booking-roomtype" title="Select Room Type"
                                                 data-header="Room Type" disabled="disabled">
-                                                <option value="Single" selected="selected">Single Room</option>
-                                                <option value="Double">Double Room</option>
-                                                <option value="Deluxe">Deluxe Room</option>
+                                                @foreach ($roomTypes as $key => $type )
+                                                    <option value="{{$key}}" {{$key == $bookingData['booking_roomtype'] ? 'selected': ''}} >{{$type}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <!-- DATE -->
@@ -397,24 +404,8 @@
                                                         </label>
                                                         <div class="guests-button">
                                                             <div class="minus"></div>
-                                                            <input type="text" name="booking-adults"
-                                                                class="booking-guests" value="0">
-                                                            <div class="plus"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="guests-buttons">
-                                                        <label>Cildren
-                                                            <a href="#" title="" data-toggle="popover"
-                                                                data-placement="top" data-trigger="hover"
-                                                                data-content="Under 18 years"
-                                                                data-original-title="Children">
-                                                                <i class="fa fa-info-circle"></i>
-                                                            </a>
-                                                        </label>
-                                                        <div class="guests-button">
-                                                            <div class="minus"></div>
-                                                            <input type="text" name="booking-children"
-                                                                class="booking-guests" value="0">
+                                                            <input type="text" name="booking_adults"
+                                                                class="booking-guests" value="{{$bookingData['booking_adults']}}">
                                                             <div class="plus"></div>
                                                         </div>
                                                     </div>

@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('status', 10)->default('pending');
-            $table->decimal('total_cost', 10, 2);
             $table->text('notes')->nullable();
             $table->string('payment_method', 10)->default('cash');
             $table->string('payment_status', 10)->default('pending');

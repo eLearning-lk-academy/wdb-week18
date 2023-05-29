@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WebRoomController;
+use App\Http\Controllers\WebBookingController;
+use App\Http\Controllers\WebOrderController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -48,6 +50,16 @@ Route::middleware(['auth','permission:rooms'])->group(function () {
 
 Route::get('/rooms', [WebRoomController::class, 'index'])->name('rooms');
 Route::get('/room/{slug}', [WebRoomController::class, 'show'])->name('room.show');
-require __DIR__.'/auth.php';
 
+// Booking
+Route::post('booking/create', [WebBookingController::class, 'create'])->name('booking.create');
+Route::post('booking/confirm', [WebBookingController::class, 'confirm'])->name('booking.confirm');
+
+// Cart
+Route::get('cart', [WebOrderController::class, 'cart'])->name('cart');
+Route::post('cart/checkout', [WebOrderController::class, 'checkout'])->name('cart.checkout');
+
+
+
+require __DIR__.'/auth.php';
 Auth::routes();
