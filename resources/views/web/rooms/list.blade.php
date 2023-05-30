@@ -1,4 +1,4 @@
-@extends('layouts.web2')
+@extends('layouts.web')
 @section('pageTitle')
     <!-- ========== PAGE TITLE ========== -->
     <div class="page-title gradient-overlay op6"
