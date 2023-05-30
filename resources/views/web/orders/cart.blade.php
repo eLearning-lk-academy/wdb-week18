@@ -1,8 +1,8 @@
-@extends('layouts.web2')
+@extends('layouts.web')
 @section('content')
     <main>
         <div class="container">
-            <form action={{route('cart.checkout')}} method="post">
+            <form action={{route('order.create')}} method="post">
             @csrf
             @php 
                 $total = 0;

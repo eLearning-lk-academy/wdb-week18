@@ -16,7 +16,7 @@ class WebOrderController extends Controller
         return view('web.orders.cart', compact('orderItems'));
     }
 
-    public function checkout(Request $request){
+    public function create(Request $request){
         
         $diff = array_diff(session()->get('orderItems'), $request->items); 
         OrderItem::whereIn('id', $diff)->delete();
@@ -29,10 +29,46 @@ class WebOrderController extends Controller
             'payment_status' => 'pending',
             'payment_id' => '',
         ]);
-        OrderItem::whereIn('id', $request->items)->update([
+        $orderItems = OrderItem::whereIn('id', $request->items)->update([
             'order_id' => $order->id,
         ]);
 
-        dd($order);
+        return redirect()->route('cart.checkout', urlencode(base64_encode($order->id)));
+    }
+
+    public function checkout($orderID){
+        $order = Order::find(base64_decode(urldecode($orderID)));
+        
+        return view('web.orders.checkout', compact('order'));
+    }
+
+    public function confirm(Request $request, $orderID){
+        $validated = $request->validate([
+            'first_name' => 'string|required',
+            'last_name' => 'string|required',
+            'email' => 'email|required',
+            'phone' => 'string|required',
+            'address' => 'string|required',
+            'paymethod'=> 'required',
+        ]);
+        
+        $order = Order::find(base64_decode(urldecode($orderID)));
+        $order->update([
+            'payment_method' => $request->paymethod,
+            'checkout_data' => json_encode([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'address' => $request->address,
+            ]),
+        ]);
+        
+        if($request->paymethod == 'cash'){
+           echo 'cash';
+           exit;
+        }elseif($request->paymethod == 'payhere'){
+            return redirect()->route('payhere.pay', urlencode(base64_encode($order->id)));
+        }
     }
 }
