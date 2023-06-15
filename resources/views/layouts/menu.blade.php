@@ -30,3 +30,22 @@
     </ul>
 </li>
 @endcan
+{{-- @can('orders') --}}
+<li class="nav-item">
+    <a href="#" class="nav-link">
+        <i class="nav-icon  fa-solid fa-file-invoice-dollar"></i>
+        <p>
+            Orders
+            <i class="fas fa-angle-left right"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview" style="display: none;">
+        <li class="nav-item">
+            <a href="{{route('admin.orders')}}" class="nav-link  {{ Request::is('admin.orders') ? 'active' : '' }}">
+                <i class="fas fa-list nav-icon"></i>
+                <p>All Orders</p>
+            </a>
+        </li>
+    </ul>
+</li>
+{{-- @endcan --}}

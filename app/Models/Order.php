@@ -38,4 +38,8 @@ class Order extends Model
             ->selectRaw('sum(amount) as total')
             ->groupBy('order_id')->first()->total;
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

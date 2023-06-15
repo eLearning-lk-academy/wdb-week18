@@ -6,8 +6,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WebRoomController;
 use App\Http\Controllers\WebBookingController;
 use App\Http\Controllers\WebOrderController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\Payment\PayhereController;
 use Illuminate\Support\Facades\Route;
+
 
 
 /*
@@ -36,7 +38,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth','permission:rooms'])->group(function () {
     Route::prefix('/dashboard')->group(function () {
-    //Rooms CRUD
+        //Rooms CRUD
         Route::get('/rooms', [RoomController::class, 'index'])->name('room.index');
         Route::prefix('/room')->group(function(){
             Route::get('/add',[RoomController::class, 'create'])->name('room.create');
@@ -45,6 +47,10 @@ Route::middleware(['auth','permission:rooms'])->group(function () {
             Route::put('/{room}/edit',[RoomController::class, 'update'])->name('room.update');
             Route::delete('/{room}/delete',[RoomController::class, 'destroy'])->name('room.destroy');
             Route::post('/image-upload', [RoomController::class, 'imageUpload'])->name('room.image.upload');
+        });
+        Route::prefix('/orders')->group(function(){
+            Route::get('/', [OrdersController::class, 'index'])->name('admin.orders');
+            Route::get('/table', [OrdersController::class, 'dataTable'])->name('admin.ordersTable');
         });
     });
 });
@@ -61,6 +67,7 @@ Route::get('cart', [WebOrderController::class, 'cart'])->name('cart');
 Route::post('cart/checkout', [WebOrderController::class, 'create'])->name('order.create');
 Route::get('cart/checkout/{id}', [WebOrderController::class, 'checkout'])->name('cart.checkout');
 Route::post('cart/confirm/{id}', [WebOrderController::class, 'confirm'])->name('cart.confirm');
+Route::get('email', [WebOrderController::class, 'email']);
 
 //payhere
 Route::get('payhere/pay/{id}', [PayhereController::class, 'pay'])->name('payhere.pay');   

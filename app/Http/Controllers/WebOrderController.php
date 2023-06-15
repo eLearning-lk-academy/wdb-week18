@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\OrderItem;
+use App\Mail\OrderPlaced;
+use Illuminate\Support\Facades\Mail;
 
 class WebOrderController extends Controller
 {
@@ -70,5 +72,12 @@ class WebOrderController extends Controller
         }elseif($request->paymethod == 'payhere'){
             return redirect()->route('payhere.pay', urlencode(base64_encode($order->id)));
         }
+    }
+
+    public function email(){
+        $order = Order::find(5);
+        dump($order);
+        $mail =Mail::to('nuwan@nuwanr.com')->send(new OrderPlaced($order));
+        dd($mail);
     }
 }
