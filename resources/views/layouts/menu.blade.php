@@ -30,10 +30,10 @@
     </ul>
 </li>
 @endcan
-{{-- @can('orders') --}}
+
 <li class="nav-item">
     <a href="#" class="nav-link">
-        <i class="nav-icon  fa-solid fa-file-invoice-dollar"></i>
+        <i class="nav-icon fa-solid fa-file-invoice-dollar"></i>
         <p>
             Orders
             <i class="fas fa-angle-left right"></i>
@@ -48,4 +48,3 @@
         </li>
     </ul>
 </li>
-{{-- @endcan --}}

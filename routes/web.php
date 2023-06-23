@@ -6,7 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WebRoomController;
 use App\Http\Controllers\WebBookingController;
 use App\Http\Controllers\WebOrderController;
-use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Payment\PayhereController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,9 +48,9 @@ Route::middleware(['auth','permission:rooms'])->group(function () {
             Route::delete('/{room}/delete',[RoomController::class, 'destroy'])->name('room.destroy');
             Route::post('/image-upload', [RoomController::class, 'imageUpload'])->name('room.image.upload');
         });
-        Route::prefix('/orders')->group(function(){
-            Route::get('/', [OrdersController::class, 'index'])->name('admin.orders');
-            Route::get('/table', [OrdersController::class, 'dataTable'])->name('admin.ordersTable');
+        Route::prefix('orders')->group(function(){
+            Route::get('/',[OrderController::class, 'index'])->name('admin.orders');
+            Route::get('/dataTable',[OrderController::class, 'dataTable'])->name('admin.ordersTable');
         });
     });
 });
