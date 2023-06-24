@@ -12,17 +12,41 @@ class OrderController extends Controller
     }
 
     public function dataTable(Request $request){
-        
-        $orders = Order::all();
+        // dd($request->all());
+        $columnsOrder  = [
+            'id',
+            'total',
+            'name',
+            'payment_method',
+            'payment_status',
+            'status',
+            null
+        ];
+        $ordersQuery = Order::query()
+            ->selectRaw('orders.*,
+            (SELECT SUM(amount) FROM order_items WHERE order_id = orders.id) AS total,
+            CONCAT_WS(" ",TRIM(BOTH "\"" FROM JSON_EXTRACT(checkout_data, "$.first_name")),TRIM(BOTH "\"" FROM JSON_EXTRACT(checkout_data, "$.last_name")))  AS name
+            ');
+
+        if($request->order && !empty($columnsOrder[$request->order[0]['column']])){
+            $ordersQuery->orderBy($columnsOrder[$request->order[0]['column']], $request->order[0]['dir'] );
+        }else{
+            $ordersQuery->orderBy('id','asc');
+        }
+
+        if($request->length && $request->length!=-1){
+            $ordersQuery->offset($request->start)->limit($request->length);
+        }
+
+        $orders = $ordersQuery->get();
 
         $data = [];
         foreach($orders as $order){
-            $checkoutData = json_decode($order->checkout_data);
-            $name = $checkoutData->first_name.' '.$checkoutData->last_name;
+            
             $data[]=[
                 $order->id,
-                $order->total(),
-                $name,
+                $order->total,
+                $order->name,
                 $order->payment_method,
                 $order->payment_status,
                 $order->status,

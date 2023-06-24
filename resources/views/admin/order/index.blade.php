@@ -21,6 +21,10 @@
             let table = $('#orders').DataTable({
                 processing: true,
                 serverSide: true,
+                lengthMenu:[
+                    [5,10,25,50,-1],
+                    [5,10,25,50,"All"]
+                ],
                 ajax: {
                     url: "{{route('admin.ordersTable')}}",
                     method: 'GET'
