@@ -21,7 +21,21 @@ class WebRoomController extends Controller
         if($request->booking_adults){
             $rooms =$rooms->where('occupancy','>=',$request->booking_adults);
         }
+
+        if($request->booking_date){
+            $dates = explode(' - ', $request->booking_date);
+            $checkIn = strtotime($dates[0]);
+            $checkOut = strtotime($dates[1]);
+            $rooms = $rooms->whereDoesntHave('bookings', function($query) use ($checkIn, $checkOut){
+                $query->where('check_in', '<=', $checkIn)
+                    ->where('check_out', '>=', $checkOut);
+            });
+        }
+        
+
         $rooms =$rooms->get();
+
+
 
         $bookingData= [
             'booking_roomtype' => $request->booking_roomtype,
@@ -41,6 +55,14 @@ class WebRoomController extends Controller
         $room = Room::where('slug',$slug)->first();
         $bookingData = session()->get('bookingData');
         $roomTypes = Room::roomTypes;
-        return view('web.rooms.show', compact('room', 'bookingData', 'roomTypes'));
+        $dates = [];
+        foreach($room->upcomingBookings() as $booking){
+            $dates [] = [
+                $booking->check_in,
+                $booking->check_out
+            ];
+        }
+
+        return view('web.rooms.show', compact('room', 'bookingData', 'roomTypes', 'dates'));
     }
 }
