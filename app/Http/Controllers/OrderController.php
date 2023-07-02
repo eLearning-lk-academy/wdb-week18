@@ -54,6 +54,7 @@ class OrderController extends Controller
             $ordersQuery->orderBy('id','asc');
         }
 
+        $filteredCount = $ordersQuery->count();
         if($request->length && $request->length!=-1){
             $ordersQuery->offset($request->start)->limit($request->length);
         }
@@ -70,17 +71,57 @@ class OrderController extends Controller
                 $order->payment_method,
                 $order->payment_status,
                 $order->status,
-                ''
+                '<button '.($order->status =='cancelled' || $order->status =='approved' ? 'disabled' : '').' class="btn btn-success approve-btn ms-2 mt-2" data-id="'.$order->id.'" >Approve</button>
+                <button '.($order->status =='cancelled' ? 'disabled' : '').' class="btn btn-danger cancel-btn ms-2 mt-2" data-id="'.$order->id.'" >Cancel</button>
+                '
             ];
         }
 
         $output = [
             "draw" => $request->draw,
             "recordsTotal" => Order::count(),
-            "recordsFiltered" =>  $ordersQuery->count(),
+            "recordsFiltered" =>  $filteredCount,
             "data" => $data,
         ];
 
         return response()->json($output);
+    }
+
+    public function cancel(Order $order){
+        $update = $order->update([
+            'status' => 'cancelled'
+        ]);
+
+        if($update){
+            return response()->json([
+                'message' => 'Order cancelled successfully',
+                'status' => true
+            ]);
+        }else{
+            return response()->json([
+                'message' => 'Unknown error ocurred',
+                'status' => false
+            ]);
+        }
+
+    }
+
+    public function approve(Order $order){
+        $update = $order->update([
+            'status' => 'approved'
+        ]);
+
+        if($update){
+            return response()->json([
+                'message' => 'Order approved successfully',
+                'status' => true
+            ]);
+        }else{
+            return response()->json([
+                'message' => 'Unknown error ocurred',
+                'status' => false
+            ]);
+        }
+
     }
 }

@@ -51,6 +51,8 @@ Route::middleware(['auth','permission:rooms'])->group(function () {
         Route::prefix('orders')->group(function(){
             Route::get('/',[OrderController::class, 'index'])->name('admin.orders');
             Route::get('/dataTable',[OrderController::class, 'dataTable'])->name('admin.ordersTable');
+            Route::put('{order}/cancel', [OrderController::class, 'cancel'] )->name('admin.order.cancel');
+            Route::put('{order}/approve', [OrderController::class, 'approve'] )->name('admin.order.approve');
         });
     });
 });
